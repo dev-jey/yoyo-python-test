@@ -1,0 +1,8 @@
+[run]
+branch = True
+source = .
+omit =
+    */migrations/*
+    manage.py
+    yoyo_app/configs/wsgi.py
+    yoyo_app/configs/asgi.py
