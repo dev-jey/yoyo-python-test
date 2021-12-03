@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from temperature.validators import _has_special_chars, _is_string
+from temperature.validators import (_has_special_chars,
+                                    _is_string,
+                                    _is_between_1_and_10)
 from django.utils.translation import gettext_lazy as _
 
 
@@ -9,6 +11,6 @@ class TemperatureSerializer(serializers.Serializer):
     average = serializers.IntegerField(read_only=True)
     median = serializers.IntegerField(read_only=True)
     days = serializers.CharField(
-        max_length=30, allow_null=False, allow_blank=False, validators=[_is_string])
+        max_length=30, allow_null=False, allow_blank=False, validators=[_is_string, _is_between_1_and_10])
     city = serializers.CharField(
         max_length=30, allow_null=False, allow_blank=False, validators=[_has_special_chars])
