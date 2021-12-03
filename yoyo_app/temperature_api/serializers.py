@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from yoyo_app.helpers.validators import (
+from yoyo_app.validators.validators import (
     _has_special_chars, _is_between_1_and_10, _is_string)
 
 
