@@ -2,13 +2,18 @@ import os
 from statistics import median
 from typing import Dict, List
 
+import logging
 import requests
+from rest_framework.serializers import ValidationError
+
+
+logger = logging.getLogger(__name__)
 
 
 class WeatherApiCall(object):
     def __init__(self, days: int, city: str) -> None:
         self.WEATHER_API_KEY = os.getenv(
-            "WEATHER_API_KEY", "f631ca2cd6394b7283984138210312")
+            "WEATHER_API_KEY", "")
         self.base_api_url = "http://api.weatherapi.com/v1/"
         self.days = days
         self.city = city
@@ -18,7 +23,17 @@ class WeatherApiCall(object):
         API_URL = f"""{self.base_api_url}forecast.json?
                     days={self.days}&key=
                     {self.WEATHER_API_KEY}&q={self.city}"""
-        api_response = requests.get(API_URL)
+        error = ""
+        try:
+            api_response = requests.get(API_URL)
+            if api_response.status_code != 200:
+                raise ValidationError({
+                    "error": api_response.json().get("error").get("message", "")
+                })
+        except Exception as e:
+            error = e.detail.get("error").title()
+            logger.error(f'Third Party Error: {error}')
+            raise ValidationError({"error": error})
         forecasts = api_response.json().get(
             "forecast", dict()).get("forecastday", [])
         if forecasts:

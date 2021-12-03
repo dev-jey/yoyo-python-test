@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from yoyo_app.validators.validators import (
-    _has_special_chars, _is_between_1_and_10, _is_string)
+    _has_special_chars, _is_between_1_and_10)
 
 
 class TemperatureSerializer(serializers.Serializer):
@@ -11,7 +11,7 @@ class TemperatureSerializer(serializers.Serializer):
     median = serializers.IntegerField(read_only=True)
     days = serializers.CharField(
         max_length=30, allow_null=False,
-        allow_blank=False, validators=[_is_string, _is_between_1_and_10])
+        allow_blank=False, validators=[_is_between_1_and_10])
     city = serializers.CharField(
         max_length=30, allow_null=False,
         allow_blank=False, validators=[_has_special_chars])
