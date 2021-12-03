@@ -1,5 +1,7 @@
 # Yoyo Test APP
 
+[![Coverage Status](https://coveralls.io/repos/github/dev-jey/yoyo-python-test/badge.svg?branch=main)](https://coveralls.io/github/dev-jey/yoyo-python-test?branch=main)
+
 ## Description
 This is an app created as part of the Yoyo interview tests. It involves making an API call to an external weatherapi,
 and calculating the forecasted minimum, maximum and average temperatures for a specific city, over a given period of time.
@@ -70,9 +72,10 @@ Ensure you have python 3.6+ installed in your local environment
     flake8 . & python manage.py test  && coverage report -m
     ```
 ## Documentation
-Find the documentation for the project on `/api/docs`
+Find more & indepth documentation on the project, visit: `localhost:8000/swagger` or `localhost:8000/redoc`
 ## Technlogies & Packages Used
-- Python v3.9
+- Python v3.8
 - Django
 - Django Rest Framework (DRF)
 - Flake8 & Autopep8
+- Coveralls

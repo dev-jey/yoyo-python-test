@@ -13,8 +13,6 @@ WEATHER_API_KEY = os.getenv(
 
 
 class TemperatureView(APIView):
-    """
-    """
 
     permission_classes = (AllowAny,)
     serializer_class = TemperatureSerializer
