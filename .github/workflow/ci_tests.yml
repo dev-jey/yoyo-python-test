@@ -1,0 +1,43 @@
+name: django_tests
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  django_test:
+    runs-on: ubuntu-20.04
+
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Tests (in forward and reverse order) and Coveralls coverage report
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        run: |
+          python manage.py test
+          python manage.py test --reverse
+          coverage run --source='.'  manage.py test
+          coverage report
