@@ -28,7 +28,8 @@ class WeatherApiCall(object):
             api_response = requests.get(API_URL)
             if api_response.status_code != 200:
                 raise ValidationError({
-                    "error": api_response.json().get("error").get("message", "")
+                    "error":
+                    api_response.json().get("error").get("message", "")
                 })
         except Exception as e:
             error = e.detail.get("error").title()

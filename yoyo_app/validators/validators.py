@@ -3,9 +3,11 @@ import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+pattern = '[@_!#$%^&*()<>?/\|}{~:]'
+
 
 def _has_special_chars(value):
-    regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
+    regex = re.compile(pattern)
     if regex.search(value):
         raise ValidationError(
             _('%(value)s cannot contain special characters'),

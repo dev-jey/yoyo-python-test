@@ -8,6 +8,20 @@ from rest_framework.views import APIView
 from yoyo_app.temperature_api.helpers import WeatherApiCall
 from yoyo_app.temperature_api.serializers import TemperatureSerializer
 
+
+from rest_framework.filters import BaseFilterBackend
+import coreapi
+
+
+class SimpleFilterBackend(BaseFilterBackend):
+    def get_schema_fields(self, view):
+        return [coreapi.Field(
+            days='query',
+            required=False,
+            type='int'
+        )]
+
+
 WEATHER_API_KEY = os.getenv(
     "WEATHER_API_KEY", default="")
 
@@ -16,6 +30,7 @@ class TemperatureView(APIView):
 
     permission_classes = (AllowAny,)
     serializer_class = TemperatureSerializer
+    filter_backends = (SimpleFilterBackend,)
 
     def get(self, request, city: str, format=None):
         days = request.GET.get('days')
