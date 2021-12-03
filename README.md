@@ -1,7 +1,5 @@
 # Yoyo Test APP
 
-[![Coverage Status](https://coveralls.io/repos/github/dev-jey/yoyo-python-test/badge.svg?branch=main)](https://coveralls.io/github/dev-jey/yoyo-python-test?branch=main)
-
 ## Description
 This is an app created as part of the Yoyo interview tests. It involves making an API call to an external weatherapi,
 and calculating the forecasted minimum, maximum and average temperatures for a specific city, over a given period of time.
@@ -78,4 +76,5 @@ Find more & indepth documentation on the project, visit: `localhost:8000/swagger
 - Django
 - Django Rest Framework (DRF)
 - Flake8 & Autopep8
+- Github Actions
 - Coveralls

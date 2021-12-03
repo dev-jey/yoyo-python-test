@@ -43,7 +43,7 @@ class TestTemperatureStats(APITestCase):
                          'Two Must Be An Integer')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_unsuccessful_fetch_data_if_city_name_contains_special_characters(self) -> None:
+    def test_unsuccessful_if_city_name_contains_special_chars(self) -> None:
         self.url = reverse('city-temperatures', kwargs={"city": "Nairobi@"})
         response = self.client.get(self.url, self.days)
         data = response.data
