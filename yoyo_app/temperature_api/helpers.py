@@ -1,17 +1,27 @@
+import logging
 import os
 from statistics import median
 from typing import Dict, List
 
-import logging
 import requests
 from rest_framework.serializers import ValidationError
-
 
 logger = logging.getLogger(__name__)
 
 
 class WeatherApiCall(object):
+    """
+        Class initializes and object to make api calls to weather api
+        Args:
+            days: (str) number of days to forecast.
+            city: (str) name of a city.
+        Returns:
+            data: (obj) contains the maximum, minimum, median, and average
+                    temperatures.
+    """
+
     def __init__(self, days: int, city: str) -> None:
+        """Initialize all variables for an object."""
         self.WEATHER_API_KEY = os.getenv(
             "WEATHER_API_KEY", "")
         self.base_api_url = "http://api.weatherapi.com/v1/"
@@ -19,6 +29,7 @@ class WeatherApiCall(object):
         self.city = city
 
     def get_weather_stats(self) -> Dict:
+        """Make API call to the weather API."""
         formatted_stats = dict()
         API_URL = f"""{self.base_api_url}forecast.json?
                     days={self.days}&key=
@@ -42,6 +53,7 @@ class WeatherApiCall(object):
         return formatted_stats
 
     def calculate_temperature_values(self, forecasts: List) -> Dict:
+        """Calculate the response values from the API output. """
         max_temp = max(forecasts, key=lambda item: item["day"]["maxtemp_c"])
         min_temp = min(forecasts, key=lambda item: item["day"]["mintemp_c"])
         hourly_temps = [temp.get("temp_c") for value in forecasts

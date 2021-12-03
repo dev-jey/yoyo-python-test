@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
-from pathlib import Path
-import sys
 import logging
+import os
+import sys
+from pathlib import Path
 
 # Disable logging when running unit tests
 if len(sys.argv) > 1 and sys.argv[1] == 'test':
