@@ -1,5 +1,6 @@
 from django.urls import path
-from temperature.views import TemperatureView
+
+from yoyo_app.temperature_api.views import TemperatureView
 
 urlpatterns = [
     path('<str:city>/', TemperatureView.as_view(), name="temperature"),

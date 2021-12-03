@@ -1,10 +1,12 @@
 import os
-from rest_framework.views import APIView
-from rest_framework.response import Response
+
 from rest_framework import status
 from rest_framework.permissions import AllowAny
-from temperature.helpers import WeatherApiCall
-from temperature.serializers import TemperatureSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from yoyo_app.temperature_api.helpers import WeatherApiCall
+from yoyo_app.temperature_api.serializers import TemperatureSerializer
 
 WEATHER_API_KEY = os.getenv(
     "WEATHER_API_KEY", default="")
