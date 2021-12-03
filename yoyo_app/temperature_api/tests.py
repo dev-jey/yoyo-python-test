@@ -30,7 +30,8 @@ class TestTemperatureStats(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_unsuccessful_fetch_data_if_days_not_provided(self) -> None:
-        """Test if an error message is thrown if days value is not provided."""
+        """Test if an error message is thrown if days value is not
+        provided."""
         self.days["days"] = ""
         response = self.client.get(self.url, self.days)
         data = response.data
@@ -40,7 +41,8 @@ class TestTemperatureStats(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_unsuccessful_fetch_data_if_days_is_a_string(self) -> None:
-        """Test if an error message is thrown if days value is not an integer."""
+        """Test if an error message is thrown if days value is not
+        an integer."""
         self.days["days"] = "Two"
         response = self.client.get(self.url, self.days)
         data = response.data
@@ -50,7 +52,8 @@ class TestTemperatureStats(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_unsuccessful_if_city_name_contains_special_chars(self) -> None:
-        """Test if an error message is thrown if city name contains unwated characters."""
+        """Test if an error message is thrown if city name contains
+        unwated characters."""
         self.url = reverse('city-temperatures', kwargs={"city": "Nairobi@"})
         response = self.client.get(self.url, self.days)
         data = response.data
@@ -60,7 +63,8 @@ class TestTemperatureStats(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_unsuccessful_fetch_data_if_city_name_is_not_valid(self) -> None:
-        """Test if an error message is thrown if the given city name is invalid."""
+        """Test if an error message is thrown if the given city name is
+        invalid."""
         self.url = reverse('city-temperatures', kwargs={"city": "Nairobiwer"})
         response = self.client.get(self.url, self.days)
         data = response.data

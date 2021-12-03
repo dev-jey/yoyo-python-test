@@ -1,5 +1,8 @@
 # Yoyo Test APP
 
+![example workflow](https://github.com/dev-jey/yoyo-python-test/actions/workflows/ci_tests.yml/badge.svg)
+
+
 ## Description
 This is an app created as part of the Yoyo interview tests. It involves making an API call to an external weatherapi,
 and calculating the forecasted minimum, maximum and average temperatures for a specific city, over a given period of time.
@@ -25,6 +28,7 @@ and calculating the forecasted minimum, maximum and average temperatures for a s
                 views.py
         -- validators
                 validators.py
+    .coveragerc
     .env.sample
     .gitignore
     manage.py
@@ -67,7 +71,12 @@ Ensure you have python 3.6+ installed in your local environment
 
 6. Run linting and tests
     ```
-    flake8 . & python manage.py test  && coverage report -m
+    flake8 . & python manage.py test
+    ```
+
+7. Run a test coverage report
+    ```
+    coverage run --source='.'  manage.py test & coverage report
     ```
 ## Documentation
 Find more & indepth documentation on the project, visit: `localhost:8000/swagger` or `localhost:8000/redoc`
@@ -77,4 +86,3 @@ Find more & indepth documentation on the project, visit: `localhost:8000/swagger
 - Django Rest Framework (DRF)
 - Flake8 & Autopep8
 - Github Actions
-- Coveralls

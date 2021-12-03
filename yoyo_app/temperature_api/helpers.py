@@ -34,18 +34,12 @@ class WeatherApiCall(object):
         API_URL = f"""{self.base_api_url}forecast.json?
                     days={self.days}&key=
                     {self.WEATHER_API_KEY}&q={self.city}"""
-        error = ""
-        try:
-            api_response = requests.get(API_URL)
-            if api_response.status_code != 200:
-                raise ValidationError({
-                    "error":
-                    api_response.json().get("error").get("message", "")
-                })
-        except Exception as e:
-            error = e.detail.get("error").title()
-            logger.error(f'Third Party Error: {error}')
-            raise ValidationError({"error": error})
+        api_response = requests.get(API_URL)
+        if api_response.status_code != 200:
+            raise ValidationError({
+                "error":
+                api_response.json().get("error").get("message", "")
+            })
         forecasts = api_response.json().get(
             "forecast", dict()).get("forecastday", [])
         if forecasts:
@@ -54,15 +48,15 @@ class WeatherApiCall(object):
 
     def calculate_temperature_values(self, forecasts: List) -> Dict:
         """Calculate the response values from the API output. """
-        max_temp = max(forecasts, key=lambda item: item["day"]["maxtemp_c"])
-        min_temp = min(forecasts, key=lambda item: item["day"]["mintemp_c"])
         hourly_temps = [temp.get("temp_c") for value in forecasts
                         for temp in value.get("hour")]
+        max_temp = max(hourly_temps)
+        min_temp = min(hourly_temps)
         avg_temp = sum(hourly_temps) / len(hourly_temps)
         median_temp = median(hourly_temps)
         return dict({
-            "maximum": max_temp["day"]["maxtemp_c"],
-            "minimum": min_temp["day"]["maxtemp_c"],
+            "maximum": max_temp,
+            "minimum": min_temp,
             "average": round(avg_temp, 2),
             "median": median_temp
         })
