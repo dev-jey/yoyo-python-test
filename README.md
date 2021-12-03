@@ -4,33 +4,33 @@
 This is an app created as part of the Yoyo interview tests. It involves making an API call to an external weatherapi,
 and calculating the forecasted minimum, maximum and average temperatures for a specific city, over a given period of time.
 
-## File Structure
--- yoyo_app
-    -- configs
-            __init__.py
-            asgi.py
-            settings.py
-            urls.py
-            wsgi.py
-    -- temperature_api
-            migrations
-            __init__.py
-            admin.py
-            apps.py
-            helpers.py
-            models.py
-            serializers.py
-            tests.py
-            urls.py
-            views.py
-    -- validators
-            validators.py
-.env.sample
-.gitignore
-manage.py
-Pipfile
-README.md
-setup.cfg
+## Project File Structure
+    -- yoyo_app
+        -- configs
+                __init__.py
+                asgi.py
+                settings.py
+                urls.py
+                wsgi.py
+        -- temperature_api
+                migrations
+                __init__.py
+                admin.py
+                apps.py
+                helpers.py
+                models.py
+                serializers.py
+                tests.py
+                urls.py
+                views.py
+        -- validators
+                validators.py
+    .env.sample
+    .gitignore
+    manage.py
+    Pipfile
+    README.md
+    setup.cfg
 
 ## How to Install
 
@@ -60,7 +60,7 @@ Ensure you have python 3.6+ installed in your local environment
     source .env
     ```
 
-6. Start the python server by running the following command, then test out the endpoint on postman `{host}/api/locations/{city}/?days={number_of_days}`
+6. Start the python server by running the following command, then test out the endpoint on postman `/api/locations/{city}/?days={number_of_days}`
     ```
     python manage.py runserver
     ```
@@ -69,3 +69,10 @@ Ensure you have python 3.6+ installed in your local environment
     ```
     flake8 . & python manage.py test  && coverage report -m
     ```
+## Documentation
+Find the documentation for the project on `/api/docs`
+## Technlogies & Packages Used
+- Python v3.9
+- Django
+- Django Rest Framework (DRF)
+- Flake8 & Autopep8
