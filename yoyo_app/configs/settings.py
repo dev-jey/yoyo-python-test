@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'temperature'
+    'yoyo_app.temperature_api'
 ]
 
 MIDDLEWARE = [
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'yoyo.urls'
+ROOT_URLCONF = 'yoyo_app.configs.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'yoyo.wsgi.application'
+WSGI_APPLICATION = 'yoyo_app.configs.wsgi.application'
 
 
 # Database

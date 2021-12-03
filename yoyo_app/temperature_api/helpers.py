@@ -1,7 +1,8 @@
 import os
-import requests
-from typing import Dict, List
 from statistics import median
+from typing import Dict, List
+
+import requests
 
 
 class WeatherApiCall(object):
@@ -14,9 +15,12 @@ class WeatherApiCall(object):
 
     def get_weather_stats(self) -> Dict:
         formatted_stats = dict()
-        API_URL = f"{self.base_api_url}forecast.json?days={self.days}&key={self.WEATHER_API_KEY}&q={self.city}"
+        API_URL = f"""{self.base_api_url}forecast.json?
+                    days={self.days}&key=
+                    {self.WEATHER_API_KEY}&q={self.city}"""
         api_response = requests.get(API_URL)
-        forecasts = api_response.json().get("forecast", dict()).get("forecastday", [])
+        forecasts = api_response.json().get(
+            "forecast", dict()).get("forecastday", [])
         if forecasts:
             formatted_stats = self.calculate_temperature_values(forecasts)
         return formatted_stats
@@ -26,7 +30,7 @@ class WeatherApiCall(object):
         min_temp = min(forecasts, key=lambda item: item["day"]["mintemp_c"])
         hourly_temps = [temp.get("temp_c") for value in forecasts
                         for temp in value.get("hour")]
-        avg_temp = sum(hourly_temps)/len(hourly_temps)
+        avg_temp = sum(hourly_temps) / len(hourly_temps)
         median_temp = median(hourly_temps)
         return dict({
             "maximum": max_temp["day"]["maxtemp_c"],

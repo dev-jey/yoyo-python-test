@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+autopep8 = "==1.6.0"
+django-filter = "==21.1"
+djangorestframework = "==3.12.4"
+flake8 = "==4.0.1"
+isort = "==5.10.1"
+requests = "==2.26.0"
+Django = "==3.2.9"
+Markdown = "==3.3.6"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

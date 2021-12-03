@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'yoyo.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'yoyo_app.configs.settings')
 
 application = get_wsgi_application()
